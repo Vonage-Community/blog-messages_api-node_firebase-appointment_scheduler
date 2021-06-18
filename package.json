@@ -16,7 +16,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "js-datepicker": "^5.18.0",
+    "@vonage/server-sdk": "^2.10.8",
     "firebase-admin": "~8.0.0",
     "firebase-functions": "^3.1.0"
   }
