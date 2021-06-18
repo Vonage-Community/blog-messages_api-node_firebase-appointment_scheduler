@@ -1,0 +1,23 @@
+{
+  "name": "appointment-booker",
+  "version": "1.0.0",
+  "description": "Book an appointment, persist the data to firebase and receive a confirmation SMS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sms",
+    "firebase",
+    "node"
+  ],
+  "author": "Amanda Cavallaro",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "js-datepicker": "^5.18.0",
+    "firebase-admin": "~8.0.0",
+    "firebase-functions": "^3.1.0"
+  }
+}

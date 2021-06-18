@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Appointment scheduler</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/> -->
+
+    <!-- Datepicker.css -->
+    <!-- Source: https://www.cssscript.com/date-picker-calendar/ -->
+    <link rel="stylesheet" href="datepicker.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
+
+    <!-- Datepicker.js -->
+    <!-- Source: https://www.cssscript.com/date-picker-calendar/ -->
+    <script src="datepicker.js"></script>
+  </head>
+  <body>
+    <h1>Appointment Scheduler</h1>
+    <main>
+      <input
+        type="text"
+        id="date-input"
+        onchange="console.log(d.getDate())"
+        autocomplete="off"
+      />
+      <button class="Confirm">Confirm</button>
+      <button hidden="hidden" class="Cancel">Cancel</button>
+    </main>
+    <script src="script/index.js"></script>
+  </body>
+</html>
