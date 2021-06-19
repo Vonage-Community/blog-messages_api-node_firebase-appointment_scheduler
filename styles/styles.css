@@ -1,3 +1,24 @@
 body {
     text-align: center;
 }
+
+div {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+label {
+  display: inline-block;
+  width: 300px;
+}
+
+input:invalid+span:after {
+    content: '✖';
+    padding-left: 5px;
+}
+
+input:valid+span:after {
+    content: '✓';
+    padding-left: 5px;
+}

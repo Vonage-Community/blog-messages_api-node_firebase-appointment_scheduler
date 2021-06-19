@@ -5,6 +5,7 @@ const admin = require("firebase-admin");
 const Vonage = require("@vonage/server-sdk");
 
 // Adds Firebase
+// TODO Create the database from the firebase console UI
 admin.initializeApp({
   databaseURL: `${process.env.FIREBASE_DATABASE_URL}.firebaseio.com/`,
 });
@@ -15,11 +16,11 @@ const vonage = new Vonage({
   apiSecret: process.env.VONAGE_API_SECRET,
 });
 
-// start TODO time and date should be retrieved from the input datepicker
+// TODO time and date should be retrieved from the input datepicker
 // Format is 2021-06-01T08:30
 time = "14:30";
 date = "16/06/2021";
-// end TODO
+// TODO
 
 const from = process.env.VONAGE_FROM_NUMBER;
 const to = process.env.VONAGE_TO_NUMBER;
@@ -28,11 +29,11 @@ const text = `Meeting booked at ${time} on date: ${date}. Please save this code 
 // Generates an id https://gist.github.com/gordonbrander/2230317
 let randomIdGenerator = "_" + Math.random().toString(36).substr(2, 9);
 
-
 // TODO Function to check the slots taken from the database  
 // and initialise the datepicker
 exports.checkDates = () => {
-  exports.removeSlot = functions.database.ref.child("new_slot" + code).remove();
+  const dateControl = document.querySelector('input[type="datetime-local"]');
+  // TODO Check if date is available from Firebase and adds invalid date on the datepicker
 };
 
 // TODO Confirm - Persists a slot to Firebase
@@ -51,7 +52,7 @@ exports.removeSlot = (code) => {
   exports.removeSlot = functions.database.ref.child("new_slot" + code).remove();
 };
 
-// Sends an SMS back to the user's phone
+// Sends an SMS back to the user's phone using the Vonage SMS API
 exports.sendSMStoUser = () => {
   vonage.message.sendSms(from, to, text, (err, responseData) => {
     if (err) {
