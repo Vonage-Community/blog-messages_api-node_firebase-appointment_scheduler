@@ -14,8 +14,7 @@
   ],
   "author": "Amanda Cavallaro",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vonage/server-sdk": "^2.10.8",
     "firebase-admin": "~8.0.0",

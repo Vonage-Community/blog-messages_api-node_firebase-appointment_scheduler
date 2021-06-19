@@ -6,7 +6,7 @@ const Vonage = require("@vonage/server-sdk");
 
 // Adds Firebase
 admin.initializeApp({
-  databaseURL: `${process.env.FIREBASE_DATABASE_URL}firebaseio.com/`,
+  databaseURL: `${process.env.FIREBASE_DATABASE_URL}.firebaseio.com/`,
 });
 const ref = db.ref("myAppointments");
 
@@ -23,7 +23,7 @@ date = "16/06/2021";
 
 const from = process.env.VONAGE_FROM_NUMBER;
 const to = process.env.VONAGE_TO_NUMBER;
-const text = `Meeting booked at ${time} on date: ${date}`;
+const text = `Meeting booked at ${time} on date: ${date}. Please save this code in case you'd like to cancel your appointment: ${randomIdGenerator}`;
 
 // Generates an Id https://gist.github.com/gordonbrander/2230317
 let randomIdGenerator = "_" + Math.random().toString(36).substr(2, 9);
@@ -37,7 +37,14 @@ exports.sendSMS = functions.database.ref
     userId: userId,
   });
 
-// TODO Cancel - Remove information from the Database
+// TODO Cancel - Remove information from the Database, 
+// check the syntax for deleting 
+// Source: https://firebase.google.com/docs/database/web/read-and-write#web-v8_7
+const removeSlot = (code) => {
+exports.removeSlot = functions.database.ref
+  .child("new_slot" + code)
+  .remove();
+}
 
 // Sends an SMS back to the user's phone
 const sendSMStoUser = () => {
