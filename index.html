@@ -12,10 +12,10 @@
       <h1>Appointment Scheduler</h1>
       <!-- datepicker from html 
     Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local -->
-      <form>
+      <form action="/server.js" onsubmit="return validateForm()" method="POST">
         <div>
           <label for="event"
-            >Choose your slot (required, June 1st 8.30am to June 30th 4.30pm):
+            >Choose your slot:
           </label>
           <input
             id="event"

@@ -25,8 +25,15 @@ const from = process.env.VONAGE_FROM_NUMBER;
 const to = process.env.VONAGE_TO_NUMBER;
 const text = `Meeting booked at ${time} on date: ${date}. Please save this code in case you'd like to cancel your appointment: ${randomIdGenerator}`;
 
-// Generates an Id https://gist.github.com/gordonbrander/2230317
+// Generates an id https://gist.github.com/gordonbrander/2230317
 let randomIdGenerator = "_" + Math.random().toString(36).substr(2, 9);
+
+
+// TODO Function to check the slots taken from the database  
+// and initialise the datepicker
+exports.checkDates = () => {
+  exports.removeSlot = functions.database.ref.child("new_slot" + code).remove();
+};
 
 // TODO Confirm - Persists a slot to Firebase
 exports.sendSMS = functions.database.ref
@@ -37,17 +44,15 @@ exports.sendSMS = functions.database.ref
     userId: userId,
   });
 
-// TODO Cancel - Remove information from the Database, 
-// check the syntax for deleting 
+// TODO Cancel - Remove information from the Database,
+// check the syntax for deleting
 // Source: https://firebase.google.com/docs/database/web/read-and-write#web-v8_7
-const removeSlot = (code) => {
-exports.removeSlot = functions.database.ref
-  .child("new_slot" + code)
-  .remove();
-}
+exports.removeSlot = (code) => {
+  exports.removeSlot = functions.database.ref.child("new_slot" + code).remove();
+};
 
 // Sends an SMS back to the user's phone
-const sendSMStoUser = () => {
+exports.sendSMStoUser = () => {
   vonage.message.sendSms(from, to, text, (err, responseData) => {
     if (err) {
       return reject(new Error(err));
