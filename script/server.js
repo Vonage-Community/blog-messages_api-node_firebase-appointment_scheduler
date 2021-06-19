@@ -1,16 +1,61 @@
-// Send a message with the Vonage SMS API
-const result = await new Promise((resolve, reject) => {
-    vonage.message.sendSms(from, to, `Meeting booked at ${time} on date: ${date}`, (err, responseData) => {
-        if (err) {
-            return reject(new Error(err));
-        } else {
-            if (responseData.messages[0].status === "0") {
-                return resolve(`Message sent successfully: ${responseData.messages[0]['message-id']}`);
-            } else {
-                return reject(new Error(`Message failed with error: ${responseData.messages[0]['error-text']}`));
-            }
-        }
-    });
-    // Responds the user giving a booking confirmation.
-    conv.close(`Meeting booked at ${time} on date: ${date}.`);
+require("dotenv").config();
+
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+const Vonage = require("@vonage/server-sdk");
+
+// Adds Firebase
+admin.initializeApp({
+  databaseURL: `${process.env.FIREBASE_DATABASE_URL}firebaseio.com/`,
 });
+const ref = db.ref("myAppointments");
+
+const vonage = new Vonage({
+  apiKey: process.env.VONAGE_API_KEY,
+  apiSecret: process.env.VONAGE_API_SECRET,
+});
+
+// start TODO time and date should be retrieved from the input datepicker
+// Format is 2021-06-01T08:30
+time = "14:30";
+date = "16/06/2021";
+// end TODO
+
+const from = process.env.VONAGE_FROM_NUMBER;
+const to = process.env.VONAGE_TO_NUMBER;
+const text = `Meeting booked at ${time} on date: ${date}`;
+
+// Generates an Id https://gist.github.com/gordonbrander/2230317
+let randomIdGenerator = "_" + Math.random().toString(36).substr(2, 9);
+
+// TODO Confirm - Persists a slot to Firebase
+exports.sendSMS = functions.database.ref
+  .child("new_slot" + randomIdGenerator)
+  .set({
+    date: date,
+    time: time,
+    userId: userId,
+  });
+
+// TODO Cancel - Remove information from the Database
+
+// Sends an SMS back to the user's phone
+const sendSMStoUser = () => {
+  vonage.message.sendSms(from, to, text, (err, responseData) => {
+    if (err) {
+      return reject(new Error(err));
+    } else {
+      if (responseData.messages[0]["status"] === "0") {
+        return resolve(
+          `Message sent successfully: ${responseData.messages[0]["message-id"]}`
+        );
+      } else {
+        return reject(
+          new Error(
+            `Message failed with error: ${responseData.messages[0]["error-text"]}`
+          )
+        );
+      }
+    }
+  });
+};
