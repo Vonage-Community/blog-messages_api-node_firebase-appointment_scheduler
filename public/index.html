@@ -10,29 +10,33 @@
   <body>
     <main>
       <h1>Appointment Scheduler</h1>
-      <!-- datepicker from html 
+      <!-- datepicker from html
     Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local -->
-      <form action="/server.js" onsubmit="return validateForm()" method="POST">
+      <form action="/appointment" method="POST">
         <div>
-          <label for="event"
-            >Choose your slot:
-          </label>
+          <label for="slot">Choose your slot: </label>
           <input
-            id="event"
+            id="slot"
             type="datetime-local"
-            name="eventdate"
+            name="slotdate"
             min="2021-06-01T08:30"
             max="2021-06-30T16:30"
+            step="300"
             required
           />
           <span class="validity"></span>
         </div>
         <div>
-          <input type="submit" value="Book event!" />
+          <label for="phonenumber">Your phone number:</label>
+          <input type="tel" id="phonenumber" name="phonenumber" required />
+          <span class="validity"></span>
+        </div>
+        <div>
+          <input type="submit" value="Book slot!" />
         </div>
       </form>
       <button hidden="hidden" class="Cancel">Cancel</button>
     </main>
-    <script src="script/index.js"></script>
+    <!-- <script src="script/index.js"></script> -->
   </body>
 </html>
