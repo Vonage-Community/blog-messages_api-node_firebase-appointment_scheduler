@@ -35,7 +35,12 @@
           <input type="submit" value="Book slot!" />
         </div>
       </form>
-      <button hidden="hidden" class="Cancel">Cancel</button>
+      <form action="/cancelAppointment" method="POST">
+        <div>
+          <input type="text" name="code" placeholder="code" />
+          <input type="submit" value="Remove slot!" />
+        </div>
+      </form>
     </main>
     <!-- <script src="script/index.js"></script> -->
   </body>
