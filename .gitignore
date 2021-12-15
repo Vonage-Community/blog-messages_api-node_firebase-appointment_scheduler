@@ -30,7 +30,9 @@ node_modules/
 
 ### Firebase ###
 **/.firebaserc
+serviceAccountKey.json
 
 ### Firebase Patch ###
 .runtimeconfig.json
 .firebase/
+

@@ -1,16 +1,16 @@
 {
-    "myAppointments" : {
-      "0" : {
-        "date" : "2021-06-01T09:00",
-        "userId" : "1234abcd"
-      },
-      "new_activity_7kh3a3a3z" : {
-        "date" : "2021-06-01T08:50",
-        "userId" : "_7kh3a3a3z"
-      },
-      "new_activity_etxen95x3" : {
-        "date" : "2021-06-01T08:40",
-        "userId" : "_etxen95x3"
-      }
+  "myAppointments": {
+    "0": {
+      "date": "2021-06-01T09:00",
+      "userId": "1234abcd"
+    },
+    "new_activity_7kh3a3a3z": {
+      "date": "2021-06-01T08:50",
+      "userId": "_7kh3a3a3z"
+    },
+    "new_activity_etxen95x3": {
+      "date": "2021-06-01T08:40",
+      "userId": "_etxen95x3"
     }
   }
+}
