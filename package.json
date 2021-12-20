@@ -1,8 +1,8 @@
 {
   "name": "appointment-booker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Book an appointment, persist the data to firebase and receive a confirmation SMS",
-  "main": "script/server.js",
+  "main": "script/server_messages_api.js",
   "scripts": {
     "start": "node script/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
