@@ -4,8 +4,8 @@ const app = require('express')();
 const port = 3000;
 const admin = require('firebase-admin');
 const Vonage = require('@vonage/server-sdk');
-
-var serviceAccount = require('../serviceAccountKey.json');
+const { v4: uuidv4 } = require('uuid');
+const serviceAccount = require('../serviceAccountKey.json');
 
 // Initializes firebase
 admin.initializeApp({
@@ -53,7 +53,7 @@ app.post('/appointment', async (request, response) => {
 
   // Adds the slot to the database
   addToDatabase = () => {
-    let code = Math.random().toString(36).substr(2, 9);
+    let code = uuidv4();
 
     ref.child(code).set({
       date: slot,
@@ -90,6 +90,7 @@ app.post('/appointment', async (request, response) => {
   };
 
   let available = await checkIfAvailable(slot);
+
   if (available) {
     let code = addToDatabase();
     await sendSMStoUser(code);

@@ -31,6 +31,7 @@ node_modules/
 ### Firebase ###
 **/.firebaserc
 serviceAccountKey.json
+.firebaserc
 
 ### Firebase Patch ###
 .runtimeconfig.json

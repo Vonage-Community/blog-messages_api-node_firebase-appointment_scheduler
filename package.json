@@ -1,10 +1,10 @@
 {
   "name": "appointment-booker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Book an appointment, persist the data to firebase and receive a confirmation SMS",
   "main": "script/server_messages_api.js",
   "scripts": {
-    "start": "node script/server.js",
+    "start": "node script/server_messages_api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -19,6 +19,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "firebase-admin": "^9.10.0",
-    "firebase-functions": "^3.1.0"
+    "firebase-functions": "^3.1.0",
+    "uuid": "^8.3.2"
   }
 }
