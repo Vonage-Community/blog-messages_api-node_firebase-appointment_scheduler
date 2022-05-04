@@ -67,8 +67,8 @@ app.post('/appointment', async (request, response) => {
     const to = phonenumber;
     const text = `Meeting booked at ${time} on date: ${date}. Please save this code: ${code} in case you'd like to cancel your appointment.`;
     const result = await new Promise((resolve, reject) => {
-      vonage.channel.send(
-        { type: 'sms', number: TO_NUMBER },
+      vonage.message.sendSms(
+        { type: 'sms', number: process.env.VONAGE_TO_NUMBER },
         { type: 'sms', number: 'Vonage' },
         {
           content: {
@@ -98,7 +98,7 @@ app.post('/appointment', async (request, response) => {
   } else {
     // Sends user error
     response.send(
-      `Sorry, you'll need to choose a different slot.${slot} is alread busy.`
+      `Sorry, you'll need to choose a different slot.${slot} is already busy.`
     );
   }
 });
