@@ -94,11 +94,11 @@ app.post('/appointment', async (request, response) => {
   if (available) {
     let code = addToDatabase();
     await sendSMStoUser(code);
-    response.send(`This slot is available, booking it for you now: ${slot}`);
+    response.send(`This slot is available, booking it for you now: ${slot}. Please save this code: ${code} in case you'd like to cancel your appointment.`);
   } else {
     // Sends user error
     response.send(
-      `Sorry, you'll need to choose a different slot.${slot} is alread busy.`
+      `Sorry, you'll need to choose a different slot.${slot} is already busy.`
     );
   }
 });
