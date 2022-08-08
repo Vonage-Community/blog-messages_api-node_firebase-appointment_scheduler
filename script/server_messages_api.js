@@ -1,11 +1,12 @@
-require('dotenv').config();
-const express = require('express');
-const app = require('express')();
+require("dotenv").config();
+const express = require("express");
+const app = require("express")();
 const port = 3000;
-const admin = require('firebase-admin');
-const Vonage = require('@vonage/server-sdk');
-const { v4: uuidv4 } = require('uuid');
-const serviceAccount = require('../serviceAccountKey.json');
+const admin = require("firebase-admin");
+const Vonage = require("@vonage/server-sdk");
+const SMS = require("@vonage/server-sdk/lib/Messages/SMS");
+const { v4: uuidv4 } = require("uuid");
+const serviceAccount = require("../serviceAccountKey.json");
 
 // Initializes firebase
 admin.initializeApp({
@@ -13,7 +14,7 @@ admin.initializeApp({
   databaseURL: `${process.env.FIREBASE_DATABASE_URL}`,
 });
 
-ref = admin.database().ref('/myAppointments');
+ref = admin.database().ref("/myAppointments");
 
 // Sends SMS with Vonage API
 const vonage = new Vonage({
@@ -21,22 +22,22 @@ const vonage = new Vonage({
   apiSecret: process.env.VONAGE_API_SECRET,
 });
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const getDateTime = (slot) => {
-  return slot.split('T');
+  return slot.split("T");
 };
 
-app.post('/appointment', async (request, response) => {
+app.post("/appointment", async (request, response) => {
   let phonenumber = request.body.phonenumber;
   let slot = request.body.slotdate;
   let [date, time] = getDateTime(slot);
 
   // Checks if a slot is available
   checkIfAvailable = async (slot) => {
-    let snapshot = await ref.orderByChild('date').once('value');
+    let snapshot = await ref.orderByChild("date").once("value");
 
     let available = true;
     snapshot.forEach((data) => {
@@ -67,22 +68,13 @@ app.post('/appointment', async (request, response) => {
     const to = phonenumber;
     const text = `Meeting booked at ${time} on date: ${date}. Please save this code: ${code} in case you'd like to cancel your appointment.`;
     const result = await new Promise((resolve, reject) => {
-      vonage.message.sendSms(
-        { type: 'sms', number: process.env.VONAGE_TO_NUMBER },
-        { type: 'sms', number: 'Vonage' },
-        {
-          content: {
-            type: 'text',
-            text: text,
-          },
-        },
-        (err, responseData) => {
+      vonage.messages.send(
+        new SMS(text, process.env.VONAGE_TO_NUMBER, "Vonage"),
+        (err, data) => {
           if (err) {
-            console.log('Message failed with error:', err);
+            console.error(err);
           } else {
-            console.log(
-              `Message ${responseData.message_uuid} sent successfully.`
-            );
+            console.log(data.message_uuid);
           }
         }
       );
@@ -103,7 +95,7 @@ app.post('/appointment', async (request, response) => {
   }
 });
 
-app.post('/cancelAppointment', async (request, response) => {
+app.post("/cancelAppointment", async (request, response) => {
   let code = request.body.code;
 
   // Removes slot from the database
