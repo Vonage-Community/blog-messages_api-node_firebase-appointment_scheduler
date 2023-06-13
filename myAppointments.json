@@ -1,15 +1,15 @@
 {
   "myAppointments": {
     "0": {
-      "date": "2022-04-01T09:00",
+      "date": "2023-07-02T09:00",
       "userId": "1234abcd"
     },
     "new_activity_7kh3a3a3z": {
-      "date": "2022-04-01T08:50",
+      "date": "2023-07-03T08:50",
       "userId": "_7kh3a3a3z"
     },
     "new_activity_etxen95x3": {
-      "date": "2022-04-01T08:40",
+      "date": "2023-08-05T08:40",
       "userId": "_etxen95x3"
     }
   }
