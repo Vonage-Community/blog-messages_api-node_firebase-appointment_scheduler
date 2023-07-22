@@ -1,28 +1,31 @@
-body {
-    margin: auto;
-    width: 50%;
+body {   
+    background-color:#152733;
+    color: whitesmoke;
+}
+h1, h3{
+    text-align: center;
+    margin: 20px;
     padding: 10px;
 }
 
-div {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
+input {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 250px;
 }
+/* styles.css */
 
-label {
-  display: inline-block;
-  width: 300px;
-}
-
-input:invalid+span:after {
-    content: '✖';
-    color: red;
-    padding-left: 5px;
-}
-
-input:valid+span:after {
-    content: '✓';
+input:valid + span::after{
+    content:"✓";
+    padding: 5px;
     color: green;
-    padding-left: 5px;
+}
+input:invalid + span::after {
+    content: "✖";
+    padding: 5px;
+    color: red !important;
+}
+.form-control{
+    width: 350px;
 }
