@@ -18,7 +18,7 @@
     "@vonage/server-sdk": "^2.11.2",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
-    "firebase-admin": "^11.9.0",
+    "firebase-admin": "^11.11.0",
     "firebase-functions": "^4.4.1",
     "firebase-tools": "^12.3.1",
     "uuid": "^9.0.0"
